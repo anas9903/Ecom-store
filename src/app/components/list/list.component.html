@@ -1,0 +1,75 @@
+<!--header-->
+<div
+  class="p-5 bg-gradient-to-r from-purple-500 to-indigo-600 flex justify-between items-center font-semibold text-white shadow-lg"
+>
+  <div class="flex gap-5">
+    <a href="#" class="hover:underline transition duration-300">Purse</a>
+    <a href="#" class="hover:underline transition duration-300">Jackets</a>
+    <a href="#" class="hover:underline transition duration-300">New Arrivals</a>
+  </div>
+  <div class="text-2xl tracking-wider">Ecom Store</div>
+  <div class="flex gap-5">
+    <a href="#" class="hover:underline transition duration-300">Return</a>
+    <a href="#" class="hover:underline transition duration-300">Stores</a>
+  </div>
+</div>
+
+<!--grid-->
+<div class="w-full p-8 bg-gray-100 min-h-screen flex flex-col items-center">
+  <div class="shadow-2xl rounded-lg bg-white w-full max-w-6xl">
+    <div class="overflow-x-auto rounded-lg">
+      <table class="min-w-full rounded-lg">
+        <thead>
+          <tr class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white">
+            @for (col of columns; track col) {
+            <th class="py-4 px-6 text-left font-semibold text-lg tracking-wide">
+              {{ col }}
+            </th>
+            }
+          </tr>
+        </thead>
+        <tbody class="max-h-96 overflow-y-auto">
+          @for (el of productData; track el) {
+          <tr
+            class="hover:bg-indigo-100 transition-colors duration-300 cursor-pointer"
+          >
+            <td class="py-4 px-6 border-b border-gray-200 text-gray-700">
+              {{ el.title }}
+            </td>
+            <td class="py-4 px-6 border-b border-gray-200 text-gray-700">
+              {{ el.category }}
+            </td>
+            <td class="py-4 px-6 border-b border-gray-200 text-gray-700">
+              {{ el.description }}
+            </td>
+            <td class="py-4 px-6 border-b border-gray-200">
+              <img
+                class="w-20 h-20 object-cover rounded-md shadow-lg"
+                [src]="el.image"
+              />
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!--footer-->
+<div
+  class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-5 mt-10 px-10"
+>
+  <div class="container mx-auto flex justify-between items-center">
+    <div class="flex gap-5">
+      <a href="#" class="hover:underline transition duration-300"
+        >Privacy Policy</a
+      >
+      <a href="#" class="hover:underline transition duration-300"
+        >Terms of Service</a
+      >
+      <a href="#" class="hover:underline transition duration-300">Contact Us</a>
+    </div>
+    <div>&copy; 2024 Ecom Store. All rights reserved.</div>
+  </div>
+</div>
