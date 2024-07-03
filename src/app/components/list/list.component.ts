@@ -1,4 +1,4 @@
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, AsyncPipe],
+  imports: [HttpClientModule, AsyncPipe, NgOptimizedImage],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })

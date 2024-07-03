@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -18,7 +18,7 @@ interface Product {
 @Component({
   selector: 'app-detail',
   standalone: true,
-  imports: [HttpClientModule, AsyncPipe],
+  imports: [HttpClientModule, AsyncPipe, NgOptimizedImage],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.scss',
 })
