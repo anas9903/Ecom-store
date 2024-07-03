@@ -1,34 +1,43 @@
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [],
+  imports: [HttpClientModule, CommonModule, AsyncPipe],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
 export class ListComponent {
+  constructor(private http: HttpClient, private router: Router) {
+    this.getProducts()
+      .pipe(
+        catchError((error) => {
+          this.error$.next('Error fetching products');
+          return throwError(() => {
+            error;
+          });
+        })
+      )
+      .subscribe((products) => this.products$.next(products));
+  }
+  apiUrl = 'https://fakestoreapi.com/products';
   columns = ['Title', 'Category', 'Description', 'Image'];
-  productData = [
-    {
-      id: 1,
-      title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
-      price: 109.95,
-      description:
-        'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',
-      category: "men's clothing",
-      image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-      rating: { rate: 3.9, count: 120 },
-    },
-    {
-      id: 1,
-      title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
-      price: 109.95,
-      description:
-        'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',
-      category: "men's clothing",
-      image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-      rating: { rate: 3.9, count: 120 },
-    },
-  ];
+  products$ = new BehaviorSubject<any>(null);
+  error$ = new BehaviorSubject<string | null>(null);
+  getProducts(): Observable<any> {
+    return this.http.get<any>(this.apiUrl).pipe(
+      catchError((error) => {
+        console.error('Error fetching products:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+  navigateToDetail(id: number) {
+    this.router.navigate(['/details', id]);
+  }
 }

@@ -1,0 +1,46 @@
+@if (productDetail$ | async; as prodDetail ) {
+<div
+  class="max-w-4xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden flex flex-row items-center flex-grow my-8"
+>
+  <div class="w-1/2">
+    <img
+      class="w-full h-96 object-cover object-center"
+      src="{{ prodDetail.image }}"
+      alt="{{ prodDetail.title }}"
+    />
+  </div>
+  <div class="w-1/2 p-8">
+    <h2 class="text-gray-900 font-bold text-3xl mb-4">
+      {{ prodDetail.title }}
+    </h2>
+    <p class="text-gray-600 text-lg mb-4">{{ prodDetail.description }}</p>
+    <p class="text-gray-900 font-semibold text-2xl mb-4">
+      $ {{ prodDetail.price }}
+    </p>
+    <p class="text-gray-600 text-md mb-4">
+      Category: {{ prodDetail.category }}
+    </p>
+    <div class="flex items-center mt-4">
+      <svg
+        class="w-6 h-6 text-yellow-500"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.548 4.759h4.993c.97 0 1.372 1.24.588 1.81l-4.034 2.924 1.548 4.76c.3.921-.755 1.688-1.54 1.116l-4.034-2.924-4.033 2.924c-.784.572-1.839-.195-1.54-1.116l1.548-4.76-4.034-2.924c-.784-.57-.382-1.81.588-1.81h4.993l1.548-4.759z"
+        />
+      </svg>
+      <span class="text-gray-700 text-lg ml-1">{{
+        prodDetail.rating.rate
+      }}</span>
+      <span class="text-gray-600 text-md ml-2"
+        >({{ prodDetail.rating.count }} reviews)</span
+      >
+    </div>
+  </div>
+</div>
+}@else {
+<div class="flex justify-center items-center h-screen">
+  <h2>Loading...</h2>
+</div>
+}
